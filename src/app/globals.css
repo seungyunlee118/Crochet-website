@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+@theme {
+  --color-milk: #fff0f3;
+  --color-paper: #fffafb;
+  --color-cocoa: #4a2b2f;
+  --color-cocoa-soft: #6e4e52;
+  --color-strawberry: #c23a5c;
+  --color-strawberry-deep: #a82e4e;
+  --color-blush: #f6b8c6;
+  --color-butter: #ffd36e;
+  --color-mint: #8dbf95;
+  --color-line: #ebc9d1;
+}
+
+@theme inline {
+  --font-display: var(--font-dynapuff), ui-rounded, system-ui, sans-serif;
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  background: var(--color-milk);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-milk);
+  color: var(--color-cocoa);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-cocoa);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* On the strawberry header and cocoa footer the ring switches to milk */
+.on-dark :focus-visible {
+  outline-color: var(--color-milk);
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -100px;
+  z-index: 50;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--color-paper);
+  color: var(--color-cocoa);
+  font-weight: 600;
+}
+.skip-link:focus {
+  top: 12px;
+}
+
+/* Rows of single-crochet stitches, used on the header and footer bands */
+.stitched {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='12'%3E%3Cpath d='M1.5 10Q7 3 12.5 10' fill='none' stroke='white' stroke-opacity='.13' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* A running-stitch rule between sections */
+.stitch-rule {
+  height: 3px;
+  background-image: linear-gradient(to right, var(--color-line) 60%, transparent 0);
+  background-size: 18px 3px;
+  border-radius: 3px;
+}
+
+/* Hero shelf: one plank segment per cell, joined into a shelf per row */
+.shelf-cell {
+  position: relative;
+  padding-bottom: 14px;
+}
+.shelf-cell::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 14px;
+  background: var(--color-cocoa);
+  box-shadow:
+    inset 0 3px 0 rgb(255 255 255 / 0.14),
+    0 10px 14px -10px rgb(74 43 47 / 0.6);
+}
+.shelf-cell:nth-child(odd)::after {
+  border-radius: 7px 0 0 7px;
+}
+.shelf-cell:nth-child(even)::after {
+  border-radius: 0 7px 7px 0;
+}
+@media (min-width: 640px) {
+  .shelf-cell::after,
+  .shelf-cell:nth-child(odd)::after,
+  .shelf-cell:nth-child(even)::after {
+    border-radius: 0;
+  }
+  .shelf-cell:first-child::after {
+    border-radius: 7px 0 0 7px;
+  }
+  .shelf-cell:last-child::after {
+    border-radius: 0 7px 7px 0;
+  }
+}
+
+.price-tag {
+  clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%, 0 14px);
+}
+
+/* The page-load moment: plushies drop onto the shelf and squish a little */
+@keyframes settle {
+  0% {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+  55% {
+    transform: translateY(0) scale(1.03, 0.94);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(0.99, 1.02);
+  }
+  100% {
+    transform: none;
+  }
+}
+.settle {
+  transform-origin: 50% 100%;
+  animation: settle 720ms cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+@keyframes bump {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.35);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.bump {
+  animation: bump 320ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

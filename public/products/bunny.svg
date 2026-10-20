@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><defs><pattern id="st" width="14" height="12" patternUnits="userSpaceOnUse"><path d="M1.5 10Q7 3 12.5 10" fill="none" stroke="#4A2B2F" stroke-opacity=".17" stroke-width="1.6" stroke-linecap="round"/></pattern>
+<g id="a"><ellipse cx="158" cy="98" rx="27" ry="72" transform="rotate(-10 158 98)"/><ellipse cx="242" cy="98" rx="27" ry="72" transform="rotate(10 242 98)"/><ellipse cx="200" cy="300" rx="86" ry="62"/><ellipse cx="128" cy="292" rx="22" ry="32" transform="rotate(20 128 292)"/><ellipse cx="272" cy="292" rx="22" ry="32" transform="rotate(-20 272 292)"/><ellipse cx="160" cy="350" rx="32" ry="19"/><ellipse cx="240" cy="350" rx="32" ry="19"/><ellipse cx="200" cy="192" rx="106" ry="88"/></g>
+<g id="b"><ellipse cx="158" cy="96" rx="12" ry="48" transform="rotate(-10 158 96)"/><ellipse cx="242" cy="96" rx="12" ry="48" transform="rotate(10 242 96)"/></g></defs>
+<ellipse cx="200" cy="368" rx="122" ry="12" fill="#4A2B2F" opacity=".08"/>
+<use href="#a" fill="#F6B8C6" stroke="#E596AA" stroke-width="3"/><use href="#a" fill="url(#st)"/>
+<use href="#b" fill="#FFD9E2"/><use href="#b" fill="url(#st)"/>
+<ellipse cx="166" cy="196" rx="9" ry="11" fill="#2B1A1C"/><ellipse cx="234" cy="196" rx="9" ry="11" fill="#2B1A1C"/><circle cx="169" cy="191" r="3" fill="#fff"/><circle cx="237" cy="191" r="3" fill="#fff"/>
+<ellipse cx="144" cy="222" rx="15" ry="8" fill="#F28BA8" opacity=".75"/><ellipse cx="256" cy="222" rx="15" ry="8" fill="#F28BA8" opacity=".75"/>
+<ellipse cx="200" cy="210" rx="5" ry="3.5" fill="#C9667E"/><path d="M191 216q4.5 6 9 0q4.5 6 9 0" fill="none" stroke="#2B1A1C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
