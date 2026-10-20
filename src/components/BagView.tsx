@@ -12,8 +12,9 @@ import { CloseIcon, LockIcon, MinusIcon, PlusIcon } from "./icons";
 
 type CheckoutReply = { url?: string; session?: string; error?: string; stock?: Record<string, number> };
 
-// `stock` is how many of each piece are left, from the server
-export function BagView({ stock }: { stock: Record<string, number> }) {
+// `stock` is how many of each piece are left, from the server.
+// `checkoutOpen` is false until payments are connected, and the bag shows "Opening soon" instead.
+export function BagView({ stock, checkoutOpen }: { stock: Record<string, number>; checkoutOpen: boolean }) {
   // Fresher counts from a checkout that was turned down
   const [latest, setLatest] = useState<Record<string, number>>({});
   const left = (slug: string) => latest[slug] ?? stock[slug] ?? 0;
@@ -145,21 +146,35 @@ export function BagView({ stock }: { stock: Record<string, number> }) {
         <dl className="mt-4 border-t-2 border-dashed border-line pt-4">
           <Row term="Total" value={formatPrice(subtotal + shipping)} strong />
         </dl>
-        <button
-          type="button"
-          onClick={checkout}
-          disabled={status === "loading" || available.length === 0}
-          className={`${buttonClass} mt-6 w-full`}
-        >
-          {status === "loading" ? "Opening checkout…" : "Check out"}
-        </button>
-        <div aria-live="assertive">
-          {error && (
-            <p role="alert" className="mt-3 rounded-2xl border-2 border-strawberry px-4 py-2.5 text-[0.95rem]">
-              {error}
+        {checkoutOpen ? (
+          <>
+            <button
+              type="button"
+              onClick={checkout}
+              disabled={status === "loading" || available.length === 0}
+              className={`${buttonClass} mt-6 w-full`}
+            >
+              {status === "loading" ? "Opening checkout…" : "Check out"}
+            </button>
+            <div aria-live="assertive">
+              {error && (
+                <p role="alert" className="mt-3 rounded-2xl border-2 border-strawberry px-4 py-2.5 text-[0.95rem]">
+                  {error}
+                </p>
+              )}
+            </div>
+          </>
+        ) : (
+          <>
+            <button type="button" disabled className={`${buttonClass} mt-6 w-full`}>
+              Opening soon
+            </button>
+            <p className="mt-3 rounded-2xl bg-butter/45 px-4 py-2.5 text-[0.95rem]">
+              We&apos;re getting the shop ready, so checkout isn&apos;t open yet. Your bag is saved on this device
+              until it opens.
             </p>
-          )}
-        </div>
+          </>
+        )}
         <p className="mt-4 flex items-start gap-2 text-[0.95rem] text-cocoa-soft">
           <LockIcon className="mt-0.5 size-5 shrink-0" />
           <span>Secure checkout by Stripe. Pay with a card, Apple Pay or Google Pay. US shipping only.</span>

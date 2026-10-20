@@ -75,6 +75,8 @@ The simplest host for this kind of site is Vercel (it has a free plan):
 
 Stripe keeps test mode and live mode apart: a webhook added in test mode has its own signing secret and only hears about test orders, so add it again in live mode for the real shop. The shop counts test orders separately too, so trying it with test cards never lowers your real stock.
 
+Until the Stripe key and Upstash Redis are both connected, the bag shows "Opening soon" instead of the checkout button, so visitors can look around but not pay.
+
 To check it's working, place a test order: the piece's count on the shop goes down, and the webhook's page in Stripe lists the delivery as succeeded.
 
 ## For developers
